@@ -1,3 +1,5 @@
+import Validator from "../utils/Validator.js";
+
 class Lotto {
   #numbers;
 

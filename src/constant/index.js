@@ -4,5 +4,9 @@ export const Message = {
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
 };
 
-export const LottoLength = 6;
-export const LottoNumberRange = { MIN: 1, MAX: 45 };
+export const LottoConstants = {
+  LENGTH: 6,
+  MIN_NUMBER: 1,
+  MAX_NUMBER: 45,
+  PRICE: 1000,
+};
