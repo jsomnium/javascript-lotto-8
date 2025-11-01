@@ -29,6 +29,8 @@ class LottoController {
 
     // 당첨 번호 입력
     const winningNumbersInput = await this.#inputView.inputWinningNumbers();
+    const winningNumbers = this.#LottoService.parseWinningNumbers(winningNumbersInput);
+    this.#LottoStore.setWinningLotto(winningNumbers);
 
     // 보너스 번호 입력
 

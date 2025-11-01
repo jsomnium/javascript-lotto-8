@@ -1,12 +1,15 @@
 import Lotto from "./Lotto.js";
+import Validator from "../util/Validator.js";
 
 class LottoStore {
     #purchaseAmount;
     #lottoTickets;
+    #winningLotto;
 
     constructor() {
         this.#purchaseAmount = 0;
         this.#lottoTickets = [];
+        this.#winningLotto = null;
     }
     
     setPurchaseAmount(amount) {
@@ -24,6 +27,17 @@ class LottoStore {
     getLottoTickets() {
         return this.#lottoTickets;
     }
+
+    setWinningLotto(numbers) {
+        Validator.validateLottoNumbers(numbers);
+        this.#winningLotto = new Lotto(numbers);
+    }
+
+    getWinningLotto() {
+        return this.#winningLotto;
+    }
+
+    
 }
 
 export default LottoStore;

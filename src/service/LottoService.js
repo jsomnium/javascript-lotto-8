@@ -29,6 +29,11 @@ class LottoService {
 
     return numbers.sort((a, b) => a - b);
   }
+
+  parseWinningNumbers(inputString) {
+    const numbers = inputString.split(',').map(num => Number(num.trim()));
+    return numbers;
+  }
 }
 
 export default LottoService;
