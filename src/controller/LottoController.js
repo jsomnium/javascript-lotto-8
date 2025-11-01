@@ -28,6 +28,7 @@ class LottoController {
     this.#outputView.printLotto(this.#LottoStore.getLottoTickets());
 
     // 당첨 번호 입력
+    const winningNumbersInput = await this.#inputView.inputWinningNumbers();
 
     // 보너스 번호 입력
 
