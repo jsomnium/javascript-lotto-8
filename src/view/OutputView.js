@@ -12,6 +12,10 @@ class OutputView {
     });
     Console.print('\n');
   }
+
+  printError(error) {
+    Console.print(error.message);
+  }
 }
 
 export default OutputView;

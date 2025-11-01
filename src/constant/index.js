@@ -12,9 +12,11 @@ export const LottoConstants = Object.freeze({
 });
 
 export const ErrorMessage = Object.freeze({
-  INVALID_LOTTO_NUMBERS_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
-  INVALID_LOTTO_NUMBERS_DUPLICATE: '[ERROR] 로또 번호에 중복된 숫자가 있습니다.',
-  INVALID_LOTTO_NUMBER_TYPE: '[ERROR] 로또 번호는 정수여야 합니다.',
-  INVALID_LOTTO_NUMBER_RANGE: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
-  INVALID_PURCHASE_AMOUNT: '[ERROR] 구매 금액은 양의 정수여야 합니다.',
+  PREFIX_ERROR: '[ERROR]',
+  INVALID_LOTTO_NUMBERS_LENGTH: '로또 번호는 6개여야 합니다.',
+  INVALID_LOTTO_NUMBERS_DUPLICATE: '로또 번호에 중복된 숫자가 있습니다.',
+  INVALID_LOTTO_NUMBER_TYPE: '로또 번호는 양의 정수여야 합니다.',
+  INVALID_LOTTO_NUMBER_RANGE: '로또 번호는 1부터 45 사이의 숫자여야 합니다.',
+  INVALID_PURCHASE_AMOUNT_TYPE: '구매 금액은 양의 정수여야 합니다.',
+  INVALID_PURCHASE_AMOUNT_MULTIPLE: '구매 금액은 1000원의 배수여야 합니다.',
 });

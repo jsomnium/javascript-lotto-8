@@ -1,31 +1,65 @@
 import { LottoConstants } from "../constant/index.js";
+import { ErrorMessage } from "../constant/index.js";
+import CustomError from "./Error.js";
 
-const Validator = {
-// 로또 번호 배열이 유효한지 검사
-    validateLottoNumbers(numbers) {
-        const { LENGTH, MIN_NUMBER, MAX_NUMBER } = LottoConstants;
+class Validator {
+  static validateLottoNumbers(numbers) {
+    const { LENGTH, MIN_NUMBER, MAX_NUMBER } = LottoConstants;
 
-        // 개수 검사
-        if (numbers.length !== LENGTH) {
-            throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-        }
+    this.#validateLength(numbers, LENGTH);
+    this.#validateDuplicate(numbers);
+    this.#validateLottoNumbers(numbers, MIN_NUMBER, MAX_NUMBER);
+  }
 
-        // 중복 검사
-        const uniqueNumbers = new Set(numbers);
-        if (uniqueNumbers.size !== numbers.length) {
-            throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
-        }
-
-        // 범위 및 타입 검사
-        for (const number of numbers) {
-            if (typeof number !== 'number' || !Number.isInteger(number)) {
-                throw new Error("[ERROR] 로또 번호는 정수여야 합니다.");
-            }
-            if (number < MIN_NUMBER || number > MAX_NUMBER) {
-                throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-            }
-        }
+  static #validateLength(numbers, LENGTH) {
+    if (numbers.length !== LENGTH) {
+      throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBERS_LENGTH);
     }
-};
+  }
+
+  static #validateDuplicate(numbers) {
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== numbers.length) {
+      throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBERS_DUPLICATE);
+    }
+  }
+
+  static #validateLottoNumbers(numbers, MIN_NUMBER, MAX_NUMBER) {
+    numbers.forEach((number) => this.#validateSingleLottoNumber(number, MIN_NUMBER, MAX_NUMBER));
+  }
+
+  static #validateSingleLottoNumber(number, MIN_NUMBER, MAX_NUMBER) {
+    const parsedNumber = Number(number);
+
+    if (!Number.isInteger(parsedNumber) || isNaN(parsedNumber) || parsedNumber <= 0) {
+      throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBER_TYPE);
+    }
+
+    if (parsedNumber < MIN_NUMBER || parsedNumber > MAX_NUMBER) {
+      throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBER_RANGE);
+    }
+  }
+
+  static validatePurchaseAmount(amount) {
+    const { PRICE } = LottoConstants;
+
+    this.#validatePositiveInteger(amount);
+    this.#validateMultipleOfThousand(amount, PRICE);
+  }
+
+  static #validatePositiveInteger(amount) {
+    const parsedAmount = Number(amount);
+
+    if (!Number.isInteger(parsedAmount) || isNaN(parsedAmount) || parsedAmount <= 0) {
+      throw new CustomError(ErrorMessage.INVALID_PURCHASE_AMOUNT_TYPE);
+    }
+  }
+
+  static #validateMultipleOfThousand(amount, PRICE) {
+    if (amount % PRICE !== 0) {
+      throw new CustomError(ErrorMessage.INVALID_PURCHASE_AMOUNT_MULTIPLE);
+    }
+  }
+}
 
 export default Validator;

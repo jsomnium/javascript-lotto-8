@@ -6,7 +6,7 @@ class App {
       const lottoController = new LottoController();
       await lottoController.play();
     } catch (error) {
-      // 에러 처리 로직 추가 예정
+      throw new Error(error.message);
     }
   }
 }
