@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { Message } from '../constant/index.js';
+import { ResultMessage } from '../constant/index.js';
 
 class OutputView {
-  printPurchaseAmount(amount) {
-    Console.print(`${amount}원 구매 완료되었습니다.\n`);
+  printPurchaseCount(count) {
+    Console.print(ResultMessage.PURCHASED_LOTTO_COUNT(count));
   }
 
   printLotto(lottoTickets) {

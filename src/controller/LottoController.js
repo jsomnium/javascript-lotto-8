@@ -1,25 +1,40 @@
 import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import LottoService from "../service/LottoService.js";
-import Validator from "../util/Validator.js";
+import LottoStore from "../model/LottoStore.js";
 
 class LottoController {
   #inputView;
   #outputView;
   #LottoService;
+  #LottoStore;
 
   constructor() {
     this.#inputView = new InputView();
     this.#outputView = new OutputView();
     this.#LottoService = new LottoService();
+    this.#LottoStore = new LottoStore();
   }
 
   async play() {
+    // 발행한 로또 수량 출력
     const purchaseAmount = await this.#getPurchaseAmount();
-    this.#outputView.printPurchaseAmount(purchaseAmount);
+    const purchaseCount = this.#LottoService.calculatePurchaseCount(purchaseAmount);
+    this.#outputView.printPurchaseCount(purchaseCount);
+    
+    // 발행한 로또 번호 출력
+    this.#LottoStore.setPurchaseAmount(purchaseAmount);
+    const LottoTickets = this.#LottoService.generateLottoTickets(purchaseCount);
+    this.#LottoStore.setLottoTickets(LottoTickets);
+    this.#outputView.printLotto(LottoTickets);
 
-    // const lottoTickets = this.#LottoService.generateLottoTickets(purchaseAmount);
-    // this.#outputView.printLotto(lottoTickets);
+    // 당첨 번호 입력
+
+    // 보너스 번호 입력
+
+    // 당첨 결과 출력
+
+    // 수익률 계산 및 출력
   }
 
   async #getPurchaseAmount() {

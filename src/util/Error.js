@@ -1,8 +1,8 @@
-import { Message } from "../constant";
+import { ErrorMessage } from "../constant/index.js";
 
 class CustomError extends Error {
   constructor(message) {
-    super(`${Message.PREFIX_ERROR} ${message}`);
+    super(`${ErrorMessage.PREFIX_ERROR} ${message}`);
     this.name = 'CustomError';
   }
 }
