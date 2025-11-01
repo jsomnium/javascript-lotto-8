@@ -23,10 +23,9 @@ class LottoController {
     this.#outputView.printPurchaseCount(purchaseCount);
     
     // 발행한 로또 번호 출력
-    this.#LottoStore.setPurchaseAmount(purchaseAmount);
-    const LottoTickets = this.#LottoService.generateLottoTickets(purchaseCount);
-    this.#LottoStore.setLottoTickets(LottoTickets);
-    this.#outputView.printLotto(LottoTickets);
+    const lottoTickets = this.#LottoService.generateLottoTickets(purchaseCount);
+    this.#LottoStore.addLottoTickets(lottoTickets);
+    this.#outputView.printLotto(this.#LottoStore.getLottoTickets());
 
     // 당첨 번호 입력
 
