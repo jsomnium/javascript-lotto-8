@@ -48,9 +48,7 @@ class Validator {
   }
 
   static #validatePositiveInteger(amount) {
-    const parsedAmount = Number(amount);
-
-    if (!Number.isInteger(parsedAmount) || isNaN(parsedAmount) || parsedAmount <= 0) {
+    if (!Number.isInteger(amount) || isNaN(amount) || amount <= 0) {
       throw new CustomError(ErrorMessage.INVALID_PURCHASE_AMOUNT_TYPE);
     }
   }

@@ -7,18 +7,26 @@ class LottoController {
   #inputView;
   #outputView;
   #LottoService;
-  #Validator;
-    
+
   constructor() {
     this.#inputView = new InputView();
     this.#outputView = new OutputView();
     this.#LottoService = new LottoService();
-    this.#Validator = new Validator();
   }
 
   async play() {
-    const purchaseAmount = await this.#inputView.inputPurchaseAmount();
-    this.#Validator.validatePurchaseAmount(purchaseAmount);
+    const purchaseAmount = await this.#getPurchaseAmount();
+    this.#outputView.printPurchaseAmount(purchaseAmount);
+
+    // const lottoTickets = this.#LottoService.generateLottoTickets(purchaseAmount);
+    // this.#outputView.printLotto(lottoTickets);
+  }
+
+  async #getPurchaseAmount() {
+    const inputString = await this.#inputView.inputPurchaseAmount();
+    const parsedNumber = Number(inputString);
+    this.#LottoService.validatePurchaseAmount(parsedNumber);
+    return parsedNumber;
   }
 }
 
