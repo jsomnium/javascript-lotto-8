@@ -1,4 +1,3 @@
-import Lotto from "../src/model/Lotto.js";
 import LottoStore from "../src/model/LottoStore.js";
 
 describe("보너스 번호 테스트", () => {

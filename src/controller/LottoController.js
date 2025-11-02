@@ -44,11 +44,17 @@ class LottoController {
   }
 
   async #getPurchaseAmount() {
-    const inputString = await this.#inputView.inputPurchaseAmount();
-    const parsedNumber = Number(inputString);
-    this.#LottoService.validatePurchaseAmount(parsedNumber);
-    this.#LottoStore.setPurchaseAmount(parsedNumber);
-    return parsedNumber;
+    while (true) {
+      try {
+        const inputString = await this.#inputView.inputPurchaseAmount();
+        const parsedNumber = Number(inputString);
+        this.#LottoService.validatePurchaseAmount(parsedNumber);
+        this.#LottoStore.setPurchaseAmount(parsedNumber);
+        return parsedNumber;
+      } catch (error) {
+        this.#outputView.printErrorMessage(error);
+      }
+    }
   }
 }
 

@@ -15,10 +15,6 @@ class OutputView {
     Console.print('\n');
   }
 
-  printError(error) {
-    Console.print(error.message);
-  }
-
   printWinningResult(winningResult) {
     Console.print(ResultMessage.WINNING_COMMENT);
   
@@ -33,6 +29,10 @@ class OutputView {
 
   printWinningRate(winningRate) {
     Console.print(ResultMessage.RETURN_RATE(winningRate));
+  }
+
+  printErrorMessage(error) {
+    Console.print(error.message);
   }
 }
 
