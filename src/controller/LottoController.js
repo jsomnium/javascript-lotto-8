@@ -47,6 +47,7 @@ class LottoController {
     const inputString = await this.#inputView.inputPurchaseAmount();
     const parsedNumber = Number(inputString);
     this.#LottoService.validatePurchaseAmount(parsedNumber);
+    this.#LottoStore.setPurchaseAmount(parsedNumber);
     return parsedNumber;
   }
 }
