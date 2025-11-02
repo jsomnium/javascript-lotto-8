@@ -22,11 +22,14 @@ class LottoService {
 
   parseWinningNumbers(inputString) {
     const numbers = inputString.split(',').map(num => Number(num.trim()));
+    Validator.validateLottoNumbers(numbers);
     return numbers;
   }
 
   parseBonusNumber(inputString) {
-    return Number(inputString.trim());
+    const bonusNumber = Number(inputString.trim());
+    Validator.validateSingleNumber(bonusNumber);
+    return bonusNumber;
   }
 
   #generateRandomNumbers() {

@@ -11,6 +11,11 @@ class Validator {
     this.#validateLottoNumbers(numbers, MIN_NUMBER, MAX_NUMBER);
   }
 
+  static validateSingleNumber(number) {
+    const { MIN_NUMBER, MAX_NUMBER } = LottoConstants;
+    this.#validateSingleLottoNumber(number, MIN_NUMBER, MAX_NUMBER);
+  }
+
   static #validateLength(numbers, LENGTH) {
     if (numbers.length !== LENGTH) {
       throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBERS_LENGTH);

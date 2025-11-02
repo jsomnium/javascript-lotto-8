@@ -28,13 +28,11 @@ class LottoController {
     this.#outputView.printLotto(this.#LottoStore.getLottoTickets());
 
     // 당첨 번호 입력
-    const winningNumbersInput = await this.#inputView.inputWinningNumbers();
-    const winningNumbers = this.#LottoService.parseWinningNumbers(winningNumbersInput);
+    const winningNumbers = await this.#getWinningNumbers();
     this.#LottoStore.setWinningLotto(winningNumbers);
 
     // 보너스 번호 입력
-    const bonusNumberInput = await this.#inputView.inputBonusNumber();
-    const bonusNumber = this.#LottoService.parseBonusNumber(bonusNumberInput);
+    const bonusNumber = await this.#getBonusNumber();
     this.#LottoStore.setBonusLotto(bonusNumber);
 
     // 당첨 결과 출력
@@ -44,13 +42,35 @@ class LottoController {
   }
 
   async #getPurchaseAmount() {
+    return await this.#retryOnError(async () => {
+      const inputString = await this.#inputView.inputPurchaseAmount();
+      const parsedNumber = Number(inputString);
+      this.#LottoService.validatePurchaseAmount(parsedNumber);
+      this.#LottoStore.setPurchaseAmount(parsedNumber);
+      return parsedNumber;
+    });
+  }
+
+  async #getWinningNumbers() {
+    return await this.#retryOnError(async () => {
+      const winningNumbersInput = await this.#inputView.inputWinningNumbers();
+      const winningNumbers = this.#LottoService.parseWinningNumbers(winningNumbersInput);
+      return winningNumbers;
+    });
+  }
+
+  async #getBonusNumber() {
+    return await this.#retryOnError(async () => {
+      const bonusNumberInput = await this.#inputView.inputBonusNumber();
+      const bonusNumber = this.#LottoService.parseBonusNumber(bonusNumberInput);
+      return bonusNumber;
+    });
+  }
+
+  async #retryOnError(asyncFunction) {
     while (true) {
       try {
-        const inputString = await this.#inputView.inputPurchaseAmount();
-        const parsedNumber = Number(inputString);
-        this.#LottoService.validatePurchaseAmount(parsedNumber);
-        this.#LottoStore.setPurchaseAmount(parsedNumber);
-        return parsedNumber;
+        return await asyncFunction();
       } catch (error) {
         this.#outputView.printErrorMessage(error);
       }
