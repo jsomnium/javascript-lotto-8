@@ -1,0 +1,47 @@
+import Lotto from "../model/Lotto.js";
+import Validator from "../util/Validator.js";
+import { LottoConstants } from "../constant/index.js";
+import { Random } from "@woowacourse/mission-utils"
+
+class LottoService {
+  validatePurchaseAmount(purchaseAmount) {
+    Validator.validatePurchaseAmount(purchaseAmount);
+  }
+
+  calculatePurchaseCount(purchaseAmount) {
+    return purchaseAmount / LottoConstants.PRICE;
+  }
+
+  generateLottoTickets(purchaseCount) {
+    const tickets = [];
+    for (let i = 0; i < purchaseCount; i++) {
+      tickets.push(new Lotto(this.#generateRandomNumbers()));
+    }
+    return tickets;
+  }
+
+  parseWinningNumbers(inputString) {
+    const numbers = inputString.split(',').map(num => Number(num.trim()));
+    Validator.validateLottoNumbers(numbers);
+    return numbers;
+  }
+
+  parseBonusNumber(inputString) {
+    const bonusNumber = Number(inputString.trim());
+    Validator.validateSingleNumber(bonusNumber);
+    return bonusNumber;
+  }
+
+  #generateRandomNumbers() {
+    const numbers = Random.pickUniqueNumbersInRange(
+      LottoConstants.MIN_NUMBER, 
+      LottoConstants.MAX_NUMBER, 
+      LottoConstants.LENGTH
+    );
+
+    return numbers.sort((a, b) => a - b);
+  }
+
+}
+
+export default LottoService;
