@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ResultMessage } from '../constant/index.js';
+import { LottoRank } from '../constant/index.js'
 
 class OutputView {
   printPurchaseCount(count) {
@@ -19,12 +20,15 @@ class OutputView {
   }
 
   printWinningResult(winningResult) {
-    Console.print(ResultMessage.WINNING_RESULT(
-      winningResult.matchCount,
-      winningResult.amount,
-      winningResult.winningCount,
-      winningResult.hasBonus
-    ));
+    Console.print(ResultMessage.WINNING_COMMENT);
+  
+    const ranks = [LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST];
+    
+    ranks.forEach(rank => {
+      const count = winningResult.get(rank);
+      const hasBonus = rank.hasBonus || false;
+      Console.print(ResultMessage.WINNING_RESULT(rank.matchCount, rank.prize, count, hasBonus));
+    });
   }
 
   printWinningRate(winningRate) {

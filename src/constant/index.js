@@ -26,12 +26,13 @@ export const ResultMessage = Object.freeze({
   PURCHASED_LOTTO_COUNT: (count) => `\n${count}개를 구매했습니다.`,
   WINNING_COMMENT: '\n당첨 통계\n---',
   WINNING_RESULT: (matchCount, amount, winningCount, hasBonus = false) => {
+    const formattedAmount = Number(amount).toLocaleString();
     if (hasBonus) {
-      return `\n${matchCount}개 일치, 보너스 볼 일치 (${amount.toLocaleString()}원) - ${winningCount}개\n`;
+      return `${matchCount}개 일치, 보너스 볼 일치 (${formattedAmount}원) - ${winningCount}개`;
     }
-    return `\n${matchCount}개 일치 (${amount.toLocaleString()}원) - ${winningCount}개\n`;
+    return `${matchCount}개 일치 (${formattedAmount}원) - ${winningCount}개`;
   },
-  RETURN_RATE: (rate) => `총 수익률은 ${rate.toFixed(2)}%입니다.`,
+  RETURN_RATE: (rate) => `총 수익률은 ${rate}%입니다.`,
 });
 
 export const LottoRank = Object.freeze({
