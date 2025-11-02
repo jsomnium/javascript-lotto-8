@@ -20,6 +20,15 @@ class LottoService {
     return tickets;
   }
 
+  parseWinningNumbers(inputString) {
+    const numbers = inputString.split(',').map(num => Number(num.trim()));
+    return numbers;
+  }
+
+  parseBonusNumber(inputString) {
+    return Number(inputString.trim());
+  }
+
   #generateRandomNumbers() {
     const numbers = Random.pickUniqueNumbersInRange(
       LottoConstants.MIN_NUMBER, 
@@ -30,10 +39,6 @@ class LottoService {
     return numbers.sort((a, b) => a - b);
   }
 
-  parseWinningNumbers(inputString) {
-    const numbers = inputString.split(',').map(num => Number(num.trim()));
-    return numbers;
-  }
 }
 
 export default LottoService;

@@ -33,6 +33,9 @@ class LottoController {
     this.#LottoStore.setWinningLotto(winningNumbers);
 
     // 보너스 번호 입력
+    const bonusNumberInput = await this.#inputView.inputBonusNumber();
+    const bonusNumber = this.#LottoService.parseBonusNumber(bonusNumberInput);
+    this.#LottoStore.setBonusLotto(bonusNumber);
 
     // 당첨 결과 출력
 

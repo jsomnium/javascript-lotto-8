@@ -39,6 +39,4 @@ describe("로또 클래스 테스트", () => {
     const lotto = new Lotto([5, 12, 23, 34, 41, 45]);
     expect(lotto.getNumbers()).toEqual([5, 12, 23, 34, 41, 45]);
   });
-
-  
 });

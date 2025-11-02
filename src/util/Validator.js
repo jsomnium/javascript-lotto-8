@@ -58,6 +58,19 @@ class Validator {
       throw new CustomError(ErrorMessage.INVALID_PURCHASE_AMOUNT_MULTIPLE);
     }
   }
+    
+  static validateBonusNumber(bonusNumber, winningNumbers) {
+    const { MIN_NUMBER, MAX_NUMBER } = LottoConstants;
+
+    this.#validateSingleLottoNumber(bonusNumber, MIN_NUMBER, MAX_NUMBER);
+    this.#validateBonusNotInWinningNumbers(bonusNumber, winningNumbers);
+  }
+
+  static #validateBonusNotInWinningNumbers(bonusNumber, winningNumbers) {
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBERS_DUPLICATE);
+    }
+  }
 }
 
 export default Validator;
