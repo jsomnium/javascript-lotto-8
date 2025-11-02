@@ -9,7 +9,7 @@ class OutputView {
 
   printLotto(lottoTickets) {
     lottoTickets.forEach((ticket) => {
-      const numbers = Array.from(ticket.getNumbers()).sort((a, b) => a - b);
+      const numbers = ticket.getNumbers();
       Console.print(`[${numbers.join(', ')}]`);
     });
     Console.print('\n');

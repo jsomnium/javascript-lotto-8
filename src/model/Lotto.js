@@ -12,8 +12,12 @@ class Lotto {
     Validator.validateLottoNumbers(numbers);
   }
 
-  getNumbers() {
+  getNumbersSet() {
     return this.#numbers;
+  }
+
+  getNumbers() {
+    return Array.from(this.#numbers).sort((a, b) => a - b);
   }
 
   countMatchingNumbers(winningNumbers) {

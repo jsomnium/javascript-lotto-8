@@ -44,7 +44,7 @@ class LottoStore {
   }
 
   setBonusLotto(number) {
-    const winningNumbers = this.#winningLotto.getNumbers();
+    const winningNumbers = this.#winningLotto.getNumbersSet();
     Validator.validateBonusNumber(number, winningNumbers);
     this.#bonusNumber = number;
   }
