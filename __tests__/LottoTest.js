@@ -37,6 +37,6 @@ describe("로또 클래스 테스트", () => {
 
   test("올바른 로또 번호가 주어지면 정상적으로 생성된다.", () => {
     const lotto = new Lotto([5, 12, 23, 34, 41, 45]);
-    expect(lotto.getNumbers()).toEqual([5, 12, 23, 34, 41, 45]);
+    expect(lotto.getNumbers()).toEqual(new Set([5, 12, 23, 34, 41, 45]));
   });
 });

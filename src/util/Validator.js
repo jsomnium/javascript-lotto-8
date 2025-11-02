@@ -67,7 +67,7 @@ class Validator {
   }
 
   static #validateBonusNotInWinningNumbers(bonusNumber, winningNumbers) {
-    if (winningNumbers.includes(bonusNumber)) {
+    if (winningNumbers.has(bonusNumber)) {
       throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBERS_DUPLICATE);
     }
   }
