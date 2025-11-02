@@ -15,6 +15,20 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  countMatchingNumbers(winningNumbers) {
+    let matchCount = 0;
+    winningNumbers.forEach((number) => {
+      if (this.#numbers.has(number)) {
+        matchCount++;
+      }
+    });
+    return matchCount;
+  }
+
+  hasNumber(number) {
+    return this.#numbers.has(number);
+  }
 }
 
 export default Lotto;

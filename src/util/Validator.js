@@ -71,6 +71,12 @@ class Validator {
       throw new CustomError(ErrorMessage.INVALID_LOTTO_NUMBERS_DUPLICATE);
     }
   }
+
+  static validateLottoStoreForResult(lottoTickets, winningLotto, bonusNumber) {
+    if (lottoTickets.length === 0 || !winningLotto || bonusNumber === null) {
+      throw new CustomError(ErrorMessage.INVALID_RESULT_CALCULATION);
+    }
+  }
 }
 
 export default Validator;

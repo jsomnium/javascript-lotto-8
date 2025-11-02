@@ -8,13 +8,27 @@ class OutputView {
 
   printLotto(lottoTickets) {
     lottoTickets.forEach((ticket) => {
-      Console.print(`[${ticket.getNumbers().join(', ')}]`);
+      const numbers = Array.from(ticket.getNumbers()).sort((a, b) => a - b);
+      Console.print(`[${numbers.join(', ')}]`);
     });
     Console.print('\n');
   }
 
   printError(error) {
     Console.print(error.message);
+  }
+
+  printWinningResult(winningResult) {
+    Console.print(ResultMessage.WINNING_RESULT(
+      winningResult.matchCount,
+      winningResult.amount,
+      winningResult.winningCount,
+      winningResult.hasBonus
+    ));
+  }
+
+  printWinningRate(winningRate) {
+    Console.print(ResultMessage.RETURN_RATE(winningRate));
   }
 }
 

@@ -15,7 +15,7 @@ class LottoService {
   generateLottoTickets(purchaseCount) {
     const tickets = [];
     for (let i = 0; i < purchaseCount; i++) {
-        tickets.push(new Lotto(this.#generateRandomNumbers()));
+      tickets.push(new Lotto(this.#generateRandomNumbers()));
     }
     return tickets;
   }

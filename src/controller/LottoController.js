@@ -38,8 +38,9 @@ class LottoController {
     this.#LottoStore.setBonusLotto(bonusNumber);
 
     // 당첨 결과 출력
-
-    // 수익률 계산 및 출력
+    this.#LottoStore.calculateResult();
+    this.#outputView.printWinningResult(this.#LottoStore.getWinningResult());
+    this.#outputView.printWinningRate(this.#LottoStore.getWinningRate());
   }
 
   async #getPurchaseAmount() {
